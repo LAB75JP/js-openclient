@@ -182,6 +182,7 @@ var ServerManager = base.Manager.extend({
     } else {
       var client = this.client;
       return client.floating_ips.all({
+        endpoint_type: 'publicURL',
         success: function (ips) {
           var available;
 
@@ -194,6 +195,7 @@ var ServerManager = base.Manager.extend({
             return finish(available);
           } else {
             client.floating_ips.create({
+              endpoint_type: 'publicURL',
               success: function (ip) {
                 return finish(ip.ip);
               },
